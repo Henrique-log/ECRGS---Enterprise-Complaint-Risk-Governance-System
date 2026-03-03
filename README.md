@@ -1,38 +1,4 @@
-# ECRGS-Enterprise-Complaint-Risk-Governance-System
-Enterprise-governance-system
-ecrgs-enterprise-governance-system/
-│
-├── README.md
-├── LICENSE
-├── .gitignore
-│
-├── docs/
-│   ├── business-context.md
-│   ├── system-architecture.md
-│   ├── domain-model.md
-│   ├── non-functional-requirements.md
-│   └── roadmap.md
-│
-├── diagrams/
-│   ├── c4-context.png
-│   ├── c4-container.png
-│   └── erd.png
-│
-├── backend/
-│   ├── main.py
-│   ├── risk_engine.py
-│   ├── models.py
-│   ├── database.py
-│   ├── requirements.txt
-│   └── README.md
-│
-├── frontend/
-│   └── (future implementation placeholder)
-│
-└── presentation/
-    └── ECRGS_Enterprise_Technical_Edition.pptx
-
-    # ECRGS – Enterprise Complaint & Risk Governance System
+# ECRGS – Enterprise Complaint & Risk Governance System
 
 Enterprise-grade SaaS governance platform designed to centralize complaint management, operational risk classification, SLA governance, and executive-level risk visibility for Energy & Oil & Gas organizations.
 
@@ -40,7 +6,7 @@ Enterprise-grade SaaS governance platform designed to centralize complaint manag
 
 ## Executive Summary
 
-ECRGS is a hybrid Business Analysis + Product Architecture case study focused on enterprise governance systems.
+ECRGS is a hybrid Business Analysis + Product Architecture case study focused on enterprise governance systems in regulated industries.
 
 The platform addresses operational risk exposure caused by:
 
@@ -50,40 +16,56 @@ The platform addresses operational risk exposure caused by:
 - Lack of standardized risk classification
 - Limited executive visibility
 
-Estimated exposure addressed: **$5M+ annually**
+Estimated operational and contractual exposure addressed: **$5M+ annually**
+
+---
+
+## Business Problem
+
+Large Energy & Oil & Gas enterprises frequently operate with:
+
+- Decentralized complaint management
+- Spreadsheet-based SLA tracking
+- Reactive escalation processes
+- High recurrence of operational incidents
+- Limited consolidated risk reporting
+
+The absence of a centralized governance system results in unmanaged risk and financial exposure.
 
 ---
 
 ## Product Vision
 
-To serve as the centralized governance backbone for operational risk and SLA compliance across enterprise energy organizations.
+To serve as the centralized governance backbone for operational risk management and SLA compliance across enterprise energy environments.
 
 ---
 
 ## Core Capabilities
 
 ### Complaint Management
-- Structured intake
+- Structured intake process
 - Mandatory Root Cause Analysis
 - Status lifecycle tracking
-- Audit trail
+- Audit trail model
+- Role-ready structure (RBAC-ready)
 
 ### Risk Scoring Engine
 - 5x5 Impact x Probability matrix
+- Quantitative risk score calculation
 - Automated risk classification
 - Escalation recommendation logic
 
-### SLA Governance
-- Deadline tracking
+### SLA Governance Engine
+- SLA deadline tracking
 - Automated escalation triggers
-- Breach detection
+- Breach detection logic
 - SLA compliance indicator
 
 ### Executive Dashboard (Concept)
 - Risk Exposure Index
-- SLA Compliance %
-- Recurrence Rate
-- Risk Heatmap
+- SLA Compliance Rate (%)
+- Incident Recurrence Rate
+- Risk Heatmap visualization
 
 ---
 
@@ -91,12 +73,12 @@ To serve as the centralized governance backbone for operational risk and SLA com
 
 Risk Score = Impact × Probability
 
-| Score | Level     |
-|--------|----------|
-| 1–4    | Low       |
-| 5–9    | Medium    |
-| 10–15  | High      |
-| 16–25  | Critical  |
+| Score | Risk Level |
+|--------|------------|
+| 1–4    | Low        |
+| 5–9    | Medium     |
+| 10–15  | High       |
+| 16–25  | Critical   |
 
 ---
 
@@ -105,48 +87,53 @@ Risk Score = Impact × Probability
 - REST API (FastAPI)
 - Modular Risk Engine
 - SLA Governance Logic
-- PostgreSQL-ready data model
+- PostgreSQL-ready data structure
 - Cloud-native deployment ready
+- Containerization-ready architecture
 
 ---
 
 ## Non-Functional Requirements
 
-Performance:
+### Performance
 - API response time < 300ms
+- Scalable stateless services
 
-Availability:
+### Availability
 - 99.5% uptime (MVP target)
+- 99.9% enterprise target
 
-Security:
-- RBAC-ready structure
+### Security
+- Role-Based Access Control (RBAC-ready)
 - Encryption in transit (TLS)
 - Audit logging model
+- Multi-tenant ready structure
 
-Scalability:
-- Stateless services
-- Container-ready architecture
+### Scalability
+- Stateless service architecture
+- Horizontal scaling capability
+- Container-ready deployment
 
 ---
 
 ## Technology Stack
 
-Backend:
+### Backend
 - Python
 - FastAPI
 - Pydantic
 - Uvicorn
 
-Database:
+### Database
 - PostgreSQL-ready schema
 
-Infrastructure:
+### Infrastructure
 - Docker-ready
-- Cloud deployable (AWS/Azure)
+- Cloud deployable (AWS / Azure)
 
 ---
 
-## Roadmap
+## Product Roadmap
 
 Release 1 – Governance Core  
 Release 2 – Advanced Analytics  
@@ -154,111 +141,17 @@ Release 3 – Predictive Risk Intelligence
 
 ---
 
+## Project Structure (High-Level)
+
+- Backend API (FastAPI MVP)
+- Risk scoring module
+- Complaint management endpoint
+- Governance logic foundation
+- Documentation for architecture and domain modeling
+
+---
+
 ## Author
 
 Henrique Santos da Silva  
 Business Analysis | Product-Oriented Systems | Governance Architecture
-
-fastapi
-uvicorn
-pydantic
-
-def calculate_risk(impact: int, probability: int) -> dict:
-    score = impact * probability
-
-    if score <= 4:
-        level = "Low"
-        escalation = "Monitor"
-    elif score <= 9:
-        level = "Medium"
-        escalation = "Notify Manager"
-    elif score <= 15:
-        level = "High"
-        escalation = "Escalate to Compliance"
-    else:
-        level = "Critical"
-        escalation = "Immediate Executive Escalation"
-
-    return {
-        "risk_score": score,
-        "risk_level": level,
-        "recommended_action": escalation
-    }
-
-    from pydantic import BaseModel
-from datetime import datetime
-
-class ComplaintCreate(BaseModel):
-    title: str
-    description: str
-    contract_id: str
-    impact_level: int
-    probability_level: int
-
-class ComplaintResponse(BaseModel):
-    id: int
-    title: str
-    description: str
-    contract_id: str
-    impact_level: int
-    probability_level: int
-    risk_score: int
-    risk_level: str
-    recommended_action: str
-    created_at: datetime
-
-    from datetime import datetime
-
-fake_db = []
-complaint_id_counter = 1
-
-def save_complaint(data: dict):
-    global complaint_id_counter
-
-    data["id"] = complaint_id_counter
-    data["created_at"] = datetime.utcnow()
-
-    fake_db.append(data)
-    complaint_id_counter += 1
-
-    return data
-
-    from fastapi import FastAPI
-from models import ComplaintCreate, ComplaintResponse
-from risk_engine import calculate_risk
-from database import save_complaint
-
-app = FastAPI(title="ECRGS - Enterprise Complaint & Risk Governance System")
-
-@app.post("/api/v1/complaints", response_model=ComplaintResponse)
-def create_complaint(complaint: ComplaintCreate):
-
-    risk = calculate_risk(
-        complaint.impact_level,
-        complaint.probability_level
-    )
-
-    complaint_data = complaint.dict()
-    complaint_data.update(risk)
-
-    saved = save_complaint(complaint_data)
-
-    return saved
-
-    # ECRGS Backend – FastAPI MVP
-
-Run locally:
-
-1. Install dependencies:
-pip install -r requirements.txt
-
-2. Run server:
-uvicorn main:app --reload
-
-API available at:
-http://127.0.0.1:8000/docs
-
-__pycache__/
-*.pyc
-.env
-venv/
